@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package questioner;
+
+option go_package = "github.com/sinojin/questioner/internal/questioner";
+
+service QuestionerService {
+  rpc GetAllQuestions(Empty) returns (Questions) {}
+  rpc CalculateAllQuestions(Answers) returns (Staticstic) {}
+}
+
+message Empty {}
+
+message Questions{
+  repeated Question Questions =1;
+}
+
+message Question {
+  string ID = 1;
+  string Description =2;
+  repeated Choice Choices =3;
+
+}
+message Choice {
+  int32 ID =1;
+  string Description=2;
+}
+
+message Answers {
+  repeated Answer Answers =1;
+}
+
+message Answer {
+  string ID = 1 ;
+  int32 Choice =2;
+}
+
+message Staticstic {
+  int32 CorrectAnswerNumber =1;
+  int32 Ratio =2;
+}
